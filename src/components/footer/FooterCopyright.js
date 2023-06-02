@@ -16,8 +16,8 @@ const FooterCopyright = ({ footerLogo, spaceBottomClass, colorClass }) => {
       </div>
       <p>
         © 2020{" "}
-        <a href="//hasthemes.com" rel="noopener noreferrer" target="_blank">
-          Flone
+        <a href="#" rel="noopener noreferrer" target="_blank">
+          Abc
         </a>
         .<br /> All Rights Reserved
       </p>

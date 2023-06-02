@@ -90,7 +90,7 @@ const FooterOne = ({
               </div>
             </div>
           </div>
-          <div
+          {/* <div
             className={`${
               sideMenu ? "col-xl-2 col-sm-4" : "col-lg-2 col-sm-4"
             }`}
@@ -124,7 +124,7 @@ const FooterOne = ({
                 </ul>
               </div>
             </div>
-          </div>
+          </div> */}
           <div
             className={`${
               sideMenu ? "col-xl-3 col-sm-4" : "col-lg-2 col-sm-6"

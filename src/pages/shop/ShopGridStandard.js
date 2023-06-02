@@ -21,6 +21,7 @@ const ShopGridStandard = ({location, products}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [currentData, setCurrentData] = useState([]);
     const [sortedProducts, setSortedProducts] = useState([]);
+    const [records, setRecords] = useState([]);
 
     const pageLimit = 15;
     const {pathname} = location;
@@ -45,13 +46,26 @@ const ShopGridStandard = ({location, products}) => {
         sortedProducts = filterSortedProducts;
         setSortedProducts(sortedProducts);
         setCurrentData(sortedProducts.slice(offset, offset + pageLimit));
+        fetchData();
     }, [offset, products, sortType, sortValue, filterSortType, filterSortValue ]);
 
+  
+  const fetchData = async () => {
+    try {
+      const response = await fetch("https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetPromotedItems");
+      const jsonData = await response.json();
+      setRecords(jsonData.Data);
+      // console.log(jsonData.Data,"jsonData")
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  
     return (
         <Fragment>
             <MetaTags>
-                <title>Flone | Shop Page</title>
-                <meta name="description" content="Shop page of flone react minimalist eCommerce template." />
+                <title>ABC | Shop Page</title>
+                <meta name="description" content="Shop page of ABC react minimalist eCommerce template." />
             </MetaTags>
 
             <BreadcrumbsItem to={process.env.PUBLIC_URL + '/'}>Home</BreadcrumbsItem>
@@ -73,7 +87,7 @@ const ShopGridStandard = ({location, products}) => {
                                 <ShopTopbar getLayout={getLayout} getFilterSortParams={getFilterSortParams} productCount={products.length} sortedProductCount={currentData.length} />
 
                                 {/* shop page content default */}
-                                <ShopProducts layout={layout} products={currentData} />
+                                <ShopProducts layout={layout} products={records} />
 
                                 {/* shop product pagination */}
                                 <div className="pro-pagination-style text-center mt-30">

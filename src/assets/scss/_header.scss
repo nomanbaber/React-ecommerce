@@ -1,5 +1,7 @@
 /*----- 2. Header style ----*/
-
+.same-style.account-setting.d-none.d-lg-block, .header-compare, .header-wishlist {
+  display: none!important;
+}
 .header-area {
   position: relative;
   &.header-absolute {
@@ -16,7 +18,74 @@
     }
   }
 }
-
+:root{
+  --button-bg: #0D2B4B;
+  --e-global-color-astglobalcolor0: #0084d6;
+}
+button.button.btn-1 {
+  background: #fff;
+  color: #000;
+}
+button.button.btn-2{
+  background: transparent;
+  border-color: #fff;
+}
+section.banner-wrapper {
+  height: 100vh;
+  background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('../../assets/img/banner-bg.jpg');
+  display: flex;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+}
+.banner-heading h1 {
+  color: #fff;
+  font-size: 48px;
+  font-weight: bold;
+  line-height: 64px;
+}
+.banner-paragraph p {
+  color: #fff;
+  font-size: 20px;
+  line-height: 27px;
+}
+.banner-input {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.banner-input input {
+  width: 100%;
+}
+.button {
+  padding: 16px 15px;
+  width: 170px;
+  font-size: 16px;
+  color: #fff;
+  border: 1px solid #707070;
+}
+.banner-input-description p {
+  text-align: left;
+  color: #fff;
+}
+.banner-input-description p span {
+  font-weight: 700;
+  font-size: 16px;
+}
+.button {
+  background-color: var(--button-bg);
+  padding: 16px 15px;
+  width: 170px;
+  font-size: 16px;
+  color: #fff;
+  border: 1px solid #707070;
+  border-radius: 10px;
+  margin-right: 10px;
+}
 .sticky-bar.stick {
   position: fixed;
   z-index: 999;

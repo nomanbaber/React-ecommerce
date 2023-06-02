@@ -13,10 +13,10 @@ const MyAccount = ({ location }) => {
   return (
     <Fragment>
       <MetaTags>
-        <title>Flone | My Account</title>
+        <title>ABC | My Account</title>
         <meta
           name="description"
-          content="Compare page of flone react minimalist eCommerce template."
+          content="Compare page of ABC react minimalist eCommerce template."
         />
       </MetaTags>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
@@ -144,12 +144,11 @@ const MyAccount = ({ location }) => {
                               <div className="row">
                                 <div className="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">
                                   <div className="entries-info text-center">
-                                    <p>Farhana hayder (shuvo) </p>
-                                    <p>hastech </p>
-                                    <p> Road#1 , Block#c </p>
-                                    <p> Rampura. </p>
-                                    <p>Dhaka </p>
-                                    <p>Bangladesh </p>
+                                    <p>John Doe</p>
+                                    <p>Paul Park </p>
+                                    <p>Lorem ipsum dolor set amet</p>
+                                    <p>NYC</p>
+                                    <p>New York</p>
                                   </div>
                                 </div>
                                 <div className="col-lg-6 col-md-6 d-flex align-items-center justify-content-center">

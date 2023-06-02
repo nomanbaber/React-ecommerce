@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { Fragment } from "react";
+import React, { Fragment ,useEffect,useState} from "react";
 import { connect } from "react-redux";
 import { getProducts } from "../../helpers/product";
 import ProductGridSingle from "../../components/product/ProductGridSingle";
@@ -17,11 +17,28 @@ const ProductGrid = ({
   wishlistItems,
   compareItems,
   sliderClassName,
-  spaceBottomClass
+  spaceBottomClass,
+  apiURL
 }) => {
+  const [records, setRecords] = useState([]);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+const fetchData = async () => {
+  try {
+    const response = await fetch(apiURL);
+    const jsonData = await response.json();
+    setRecords(jsonData.Data);
+    // console.log(jsonData.Data,"jsonData")
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
   return (
     <Fragment>
-      {products.map(product => {
+      {records.map(product => {
         return (
           <ProductGridSingle
             sliderClassName={sliderClassName}

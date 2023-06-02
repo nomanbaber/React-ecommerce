@@ -48,6 +48,7 @@ const TabProduct = ({
                   type="new"
                   limit={8}
                   spaceBottomClass="mb-25"
+                  apiURL = "https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetPromotedItems"
                 />
               </div>
             </Tab.Pane>
@@ -58,6 +59,7 @@ const TabProduct = ({
                   type="bestSeller"
                   limit={8}
                   spaceBottomClass="mb-25"
+                  apiURL = "https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetPromotedItems"
                 />
               </div>
             </Tab.Pane>
@@ -68,6 +70,7 @@ const TabProduct = ({
                   type="saleItems"
                   limit={8}
                   spaceBottomClass="mb-25"
+                  apiURL = "https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetPromotedItems"
                 />
               </div>
             </Tab.Pane>
