@@ -21,12 +21,11 @@ const ProductGridSingle = ({
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
 
-  const discountedPrice = getDiscountPrice(product.price, product.discount);
+  const discountedPrice = getDiscountPrice(product.Price, product.PreviousPrice);
   // const finalProductPrice = +(product.price * currency.currencyRate).toFixed(2);
   const finalProductPrice = product.Price;
-  const finalDiscountedPrice = +(
-    discountedPrice * currency.currencyRate
-  ).toFixed(2);
+  const finalDiscountedPrice = product.PreviousPrice
+  console.log ("product.RelatedArticles" , product.RelatedArticles )
 
   return (
     <Fragment>
@@ -69,21 +68,21 @@ const ProductGridSingle = ({
             )}
 
             <div className="product-action">
-              <div className="pro-same-action pro-wishlist">
+              {/* <div className="pro-same-action pro-wishlist">
                 <button
                   className={wishlistItem !== undefined ? "active" : ""}
                   disabled={wishlistItem !== undefined}
                   title={
                     wishlistItem !== undefined
-                      ? "Added to wishlist"
+                      ? "Added to wasadishlist"
                       : "Add to wishlist"
                   }
                   onClick={() => addToWishlist(product, addToast)}
                 >
                   <i className="pe-7s-like" />
                 </button>
-              </div>
-              <div className="pro-same-action pro-cart">
+              </div> */}
+              {/* <div className="pro-same-action pro-cart">
                 {product.affiliateLink ? (
                   <a
                     href={product.affiliateLink}
@@ -97,9 +96,9 @@ const ProductGridSingle = ({
                   <Link to={`${process.env.PUBLIC_URL}/product/${product.ArticleID}`}>
                     Select Option
                   </Link>
-                ) : product.stock && product.stock > 0 ? (
+                ) : product.Stock && product.Stock > 0 ? (
                   <button
-                    onClick={() => addToCart(product, addToast)}
+                    onClick={( ) => addToCart(product , console.log("item add clicked" , product))}
                     className={
                       cartItem !== undefined && cartItem.quantity > 0
                         ? "active"
@@ -121,12 +120,12 @@ const ProductGridSingle = ({
                     Out of Stock
                   </button>
                 )}
-              </div>
-              <div className="pro-same-action pro-quickview">
+              </div> */}
+              {/* <div className="pro-same-action pro-quickview">
                 <button onClick={() => setModalShow(true)} title="Quick View">
                   <i className="pe-7s-look" />
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
           <div className="product-content text-center">

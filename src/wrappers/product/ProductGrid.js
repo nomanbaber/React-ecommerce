@@ -22,15 +22,19 @@ const ProductGrid = ({
 }) => {
   const [records, setRecords] = useState([]);
   useEffect(() => {
+    
     fetchData();
+
   }, []);
 
 const fetchData = async () => {
   try {
     const response = await fetch(apiURL);
     const jsonData = await response.json();
+     console.error('jsonData single data:', jsonData.Data[0].RelatedArticles);
+
+
     setRecords(jsonData.Data);
-    // console.log(jsonData.Data,"jsonData")
   } catch (error) {
     console.error('Error fetching data:', error);
   }
@@ -39,6 +43,7 @@ const fetchData = async () => {
   return (
     <Fragment>
       {records.map(product => {
+
         return (
           <ProductGridSingle
             sliderClassName={sliderClassName}
@@ -49,19 +54,20 @@ const fetchData = async () => {
             addToWishlist={addToWishlist}
             addToCompare={addToCompare}
             cartItem={
-              cartItems.filter(cartItem => cartItem.id === product.id)[0]
+              cartItems.filter(cartItem => cartItem.ArticleID === product.ArticleID)[0]
             }
             wishlistItem={
               wishlistItems.filter(
-                wishlistItem => wishlistItem.id === product.id
+                wishlistItem => wishlistItem.id === product.ArticleID
               )[0]
             }
             compareItem={
               compareItems.filter(
-                compareItem => compareItem.id === product.id
+                compareItem => compareItem.id === product.ArticleID
               )[0]
             }
-            key={product.id}
+            key={product.ArticleID
+            }
           />
         );
       })}
@@ -88,7 +94,7 @@ const mapStateToProps = (state, ownProps) => {
       state.productData.products,
       ownProps.category,
       ownProps.type,
-      ownProps.limit
+      ownProps.Stock
     ),
     currency: state.currencyData,
     cartItems: state.cartData,
@@ -98,7 +104,10 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = dispatch => {
+  
   return {
+
+   
     addToCart: (
       item,
       addToast,

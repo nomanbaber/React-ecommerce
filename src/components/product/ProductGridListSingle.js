@@ -5,6 +5,7 @@ import { useToasts } from "react-toast-notifications";
 import { getDiscountPrice } from "../../helpers/product";
 import Rating from "./sub-components/ProductRating";
 import ProductModal from "./ProductModal";
+import imgdata from '../../assets/img/cat-1.webp'
 
 const ProductGridListSingle = ({
   product,
@@ -16,18 +17,17 @@ const ProductGridListSingle = ({
   wishlistItem,
   compareItem,
   sliderClassName,
-  spaceBottomClass
+  spaceBottomClass,
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
 
   const discountedPrice = getDiscountPrice(product.price, product.discount);
   // const finalProductPrice = +(product.price * currency.currencyRate).toFixed(2);
-  const finalProductPrice = product.Price;
+  const finalProductPrice = 1;
   const finalDiscountedPrice = +(
     discountedPrice * currency.currencyRate
   ).toFixed(2);
-
   return (
     <Fragment>
       <div
@@ -43,6 +43,7 @@ const ProductGridListSingle = ({
               <img
                 className="default-img"
                 src={process.env.PUBLIC_URL + product.ImgLocations[0]}
+                // src={imgdata}
                 alt=""
               />
               {product.ImgLocations.length > 1 ? (
@@ -68,7 +69,7 @@ const ProductGridListSingle = ({
               ""
             )}
 
-            <div className="product-action">
+            {/* <div className="product-action">
               <div className="pro-same-action pro-wishlist">
                 <button
                   className={wishlistItem !== undefined ? "active" : ""}
@@ -93,11 +94,14 @@ const ProductGridListSingle = ({
                     {" "}
                     Buy now{" "}
                   </a>
-                ) : product.variation && product.variation.length >= 1 ? (
-                  <Link to={`${process.env.PUBLIC_URL}/product/${product.ArticleID}`}>
+                ) : product.variation && product.variation.length >= 1 &&
+                  <Link
+                    to={`${process.env.PUBLIC_URL}/product/${product.ArticleID}`}
+                  >
                     Select Option
                   </Link>
-                ) : product.stock && product.stock > 0 ? (
+                ) : // ) : product.stock && product.stock > 0 ? (
+                product.stock && product.stock > 0 ? (
                   <button
                     onClick={() => addToCart(product, addToast)}
                     className={
@@ -120,25 +124,33 @@ const ProductGridListSingle = ({
                   <button disabled className="active">
                     Out of Stock
                   </button>
-                )}
+                )
+              }
               </div>
               <div className="pro-same-action pro-quickview">
                 <button onClick={() => setModalShow(true)} title="Quick View">
                   <i className="pe-7s-look" />
                 </button>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="product-content text-center">
             <h3>
-              <Link to={process.env.PUBLIC_URL + "/product/" + product.ArticleID}>
+              <Link
+                to={process.env.PUBLIC_URL + "/product/" + product.ArticleID}
+              >
                 {product.name}
               </Link>
             </h3>
             {/* {product.rating && product.rating > 0 ? ( */}
-              <div className="product-rating">
-                <Rating ratingValue={4} />
-              </div>
+            <Link to={process.env.PUBLIC_URL + "/product/" + product.ArticleID}>
+
+            <div className="product-rating">{product.Title
+            }</div>
+            </Link>
+            <div className="product-rating">
+              <Rating ratingValue={4} />
+            </div>
             {/* ) : (
               ""
             )} */}
@@ -161,7 +173,11 @@ const ProductGridListSingle = ({
             <div className="col-xl-4 col-md-5 col-sm-6">
               <div className="product-list-image-wrap">
                 <div className="product-img">
-                  <Link to={process.env.PUBLIC_URL + "/product/" + product.ArticleID}>
+                  <Link
+                    to={
+                      process.env.PUBLIC_URL + "/product/" + product.ArticleID
+                    }
+                  >
                     <img
                       className="default-img img-fluid"
                       src={process.env.PUBLIC_URL + product.ImgLocations[0]}
@@ -195,7 +211,11 @@ const ProductGridListSingle = ({
             <div className="col-xl-8 col-md-7 col-sm-6">
               <div className="shop-list-content">
                 <h3>
-                  <Link to={process.env.PUBLIC_URL + "/product/" + product.ArticleID}>
+                  <Link
+                    to={
+                      process.env.PUBLIC_URL + "/product/" + product.ArticleID
+                    }
+                  >
                     {product.name}
                   </Link>
                 </h3>
@@ -340,7 +360,7 @@ ProductGridListSingle.propTypes = {
   product: PropTypes.object,
   sliderClassName: PropTypes.string,
   spaceBottomClass: PropTypes.string,
-  wishlistItem: PropTypes.object
+  wishlistItem: PropTypes.object,
 };
 
 export default ProductGridListSingle;

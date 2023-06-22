@@ -14,16 +14,15 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
           <ul>
             {cartData.map((single, key) => {
               const discountedPrice = getDiscountPrice(
-                single.price,
+                single.Price,
                 single.discount
               );
               const finalProductPrice = (
-                single.price * currency.currencyRate
+                single.Price * currency.currencyRate
               ).toFixed(2);
               const finalDiscountedPrice = (
                 discountedPrice * currency.currencyRate
               ).toFixed(2);
-
               discountedPrice != null
                 ? (cartTotalPrice += finalDiscountedPrice * single.quantity)
                 : (cartTotalPrice += finalProductPrice * single.quantity);
@@ -34,7 +33,8 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
                     <Link to={process.env.PUBLIC_URL + "/product/" + single.id}>
                       <img
                         alt=""
-                        src={process.env.PUBLIC_URL + single.image[0]}
+                        // src={process.env.PUBLIC_URL + single.image[0]}
+                        // src={process.env.PUBLIC_URL + single.ImgLocations[0]}
                         className="img-fluid"
                       />
                     </Link>

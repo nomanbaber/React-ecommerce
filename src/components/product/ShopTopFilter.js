@@ -13,7 +13,6 @@ const ShopTopFilter = ({ products, getSortParams }) => {
   const uniqueColors = getIndividualColors(products);
   const uniqueSizes = getProductsIndividualSizes(products);
   const uniqueTags = getIndividualTags(products);
-
   return (
     <div className="product-filter-wrapper" id="product-filter-wrapper">
       <div className="product-filter-wrapper__inner">

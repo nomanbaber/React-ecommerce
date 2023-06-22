@@ -10,11 +10,11 @@ const ProductDescriptionTab = ({ spaceBottomClass, productFullDesc }) => {
         <div className="description-review-wrapper">
           <Tab.Container defaultActiveKey="productDescription">
             <Nav variant="pills" className="description-review-topbar">
-              <Nav.Item>
+              {/* <Nav.Item>
                 <Nav.Link eventKey="additionalInfo">
                   Additional Information
                 </Nav.Link>
-              </Nav.Item>
+              </Nav.Item> */}
               <Nav.Item>
                 <Nav.Link eventKey="productDescription">Description</Nav.Link>
               </Nav.Item>

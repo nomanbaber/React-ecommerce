@@ -8,11 +8,15 @@ export const addToCart = (
   item,
   addToast,
   quantityCount,
-  selectedProductColor,
-  selectedProductSize
+  // selectedProductColor,
+  // selectedProductSize
 ) => {
   return dispatch => {
+
+    console.log("itemitemitemitem" , item)
+
     if (addToast) {
+
       addToast("Added To Cart", { appearance: "success", autoDismiss: true });
     }
     dispatch({
@@ -20,16 +24,17 @@ export const addToCart = (
       payload: {
         ...item,
         quantity: quantityCount,
-        selectedProductColor: selectedProductColor
-          ? selectedProductColor
-          : item.selectedProductColor
-          ? item.selectedProductColor
-          : null,
-        selectedProductSize: selectedProductSize
-          ? selectedProductSize
-          : item.selectedProductSize
-          ? item.selectedProductSize
-          : null
+
+        // selectedProductColor: selectedProductColor
+        //   ? selectedProductColor
+        //   : item.selectedProductColor
+        //   ? item.selectedProductColor
+        //   : null,
+        // selectedProductSize: selectedProductSize
+        //   ? selectedProductSize
+        //   : item.selectedProductSize
+        //   ? item.selectedProductSize
+        //   : null
       }
     });
   };
@@ -70,11 +75,12 @@ export const deleteAllFromCart = addToast => {
 
 // get stock of cart item
 export const cartItemStock = (item, color, size) => {
-  if (item.stock) {
-    return item.stock;
-  } else {
-    return item.variation
-      .filter(single => single.color === color)[0]
-      .size.filter(single => single.name === size)[0].stock;
-  }
+  if (item.Stock) {
+    return item.Stock;
+  } 
+  // else {
+  //   return item.variation
+  //     .filter(single => single.color === color)[0]
+  //     .size.filter(single => single.name === size)[0].stock;
+  // }
 };

@@ -138,7 +138,7 @@ function ProductModal(props) {
             </div>
             <div className="col-md-7 col-sm-12 col-xs-12">
               <div className="product-details-content quickview-content">
-                <h2>{product.name}</h2>
+                <h2>{product.Title}</h2>
                 <div className="product-details-price">
                   {discountedprice !== null ? (
                     <Fragment>

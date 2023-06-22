@@ -25,13 +25,11 @@ const ProductImageDescription = ({
     compareItem => compareItem.id === product.id
   )[0];
   const { addToast } = useToasts();
-
-  const discountedPrice = getDiscountPrice(product.price, product.discount);
-  const finalProductPrice = +(product.price * currency.currencyRate).toFixed(2);
+  const discountedPrice = getDiscountPrice(product.Price, product.discount);
+  const finalProductPrice = +(product.Price * currency.currencyRate).toFixed(2);
   const finalDiscountedPrice = +(
     discountedPrice * currency.currencyRate
   ).toFixed(2);
-
   return (
     <div
       className={`shop-area ${spaceTopClass ? spaceTopClass : ""} ${
@@ -47,7 +45,8 @@ const ProductImageDescription = ({
                 product={product}
                 thumbPosition="left"
               />
-            ) : galleryType === "rightThumb" ? (
+            ) 
+            : galleryType === "rightThumb" ? (
               <ProductImageGallerySideThumb product={product} />
             ) : galleryType === "fixedImage" ? (
               <ProductImageFixed product={product} />

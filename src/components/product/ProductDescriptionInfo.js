@@ -7,6 +7,7 @@ import { addToCart } from "../../redux/actions/cartActions";
 import { addToWishlist } from "../../redux/actions/wishlistActions";
 import { addToCompare } from "../../redux/actions/compareActions";
 import Rating from "./sub-components/ProductRating";
+import { useEffect } from "react";
 
 const ProductDescriptionInfo = ({
   product,
@@ -20,7 +21,7 @@ const ProductDescriptionInfo = ({
   addToast,
   addToCart,
   addToWishlist,
-  addToCompare
+  addToCompare,
 }) => {
   const [selectedProductColor, setSelectedProductColor] = useState(
     product.variation ? product.variation[0].color : ""
@@ -28,9 +29,13 @@ const ProductDescriptionInfo = ({
   const [selectedProductSize, setSelectedProductSize] = useState(
     product.variation ? product.variation[0].size[0].name : ""
   );
+  var stock = product.Stock;
   const [productStock, setProductStock] = useState(
-    product.variation ? product.variation[0].size[0].stock : product.stock
+    // product.variation ? product.variation[0].size[0].stock : product.Stock
+    //  product.Stock
+    0
   );
+
   const [quantityCount, setQuantityCount] = useState(1);
 
   const productCartQty = getProductCartQuantity(
@@ -39,10 +44,14 @@ const ProductDescriptionInfo = ({
     selectedProductColor,
     selectedProductSize
   );
-
+  useEffect(() => {
+    if (product.Stock != 0) {
+      setProductStock(product?.Stock);
+    }
+  }, [product?.Stock != undefined]);
   return (
     <div className="product-details-content ml-70">
-      <h2>{product.name}</h2>
+      <h2>{product.Title}</h2>
       <div className="product-details-price">
         {discountedPrice !== null ? (
           <Fragment>
@@ -68,7 +77,7 @@ const ProductDescriptionInfo = ({
         <p>{product.shortDescription}</p>
       </div>
 
-      {product.variation ? (
+      {/* {product.variation ? (
         <div className="pro-details-size-color">
           <div className="pro-details-color-wrap">
             <span>Color</span>
@@ -136,7 +145,7 @@ const ProductDescriptionInfo = ({
         </div>
       ) : (
         ""
-      )}
+      )} */}
       {product.affiliateLink ? (
         <div className="pro-details-quality">
           <div className="pro-details-cart btn-hover ml-0">
@@ -180,15 +189,15 @@ const ProductDescriptionInfo = ({
             </button>
           </div>
           <div className="pro-details-cart btn-hover">
-            {productStock && productStock > 0 ? (
+            {productStock > 0 ? (
               <button
                 onClick={() =>
                   addToCart(
                     product,
                     addToast,
-                    quantityCount,
-                    selectedProductColor,
-                    selectedProductSize
+                    quantityCount
+                    // selectedProductColor,
+                    // selectedProductSize
                   )
                 }
                 disabled={productCartQty >= productStock}
@@ -237,7 +246,7 @@ const ProductDescriptionInfo = ({
             {product.category.map((single, key) => {
               return (
                 <li key={key}>
-                  <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
+                  <Link to={process.env.PUBLIC_URL + "/shop"}>
                     {single}
                   </Link>
                 </li>
@@ -255,7 +264,7 @@ const ProductDescriptionInfo = ({
             {product.tag.map((single, key) => {
               return (
                 <li key={key}>
-                  <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
+                  <Link to={process.env.PUBLIC_URL + "/shop"}>
                     {single}
                   </Link>
                 </li>
@@ -312,25 +321,25 @@ ProductDescriptionInfo.propTypes = {
   finalDiscountedPrice: PropTypes.number,
   finalProductPrice: PropTypes.number,
   product: PropTypes.object,
-  wishlistItem: PropTypes.object
+  wishlistItem: PropTypes.object,
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     addToCart: (
       item,
       addToast,
-      quantityCount,
-      selectedProductColor,
-      selectedProductSize
+      quantityCount
+      // selectedProductColor,
+      // selectedProductSize
     ) => {
       dispatch(
         addToCart(
           item,
           addToast,
-          quantityCount,
-          selectedProductColor,
-          selectedProductSize
+          quantityCount
+          // selectedProductColor,
+          // selectedProductSize
         )
       );
     },
@@ -339,7 +348,7 @@ const mapDispatchToProps = dispatch => {
     },
     addToCompare: (item, addToast) => {
       dispatch(addToCompare(item, addToast));
-    }
+    },
   };
 };
 

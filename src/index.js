@@ -14,6 +14,7 @@ import "./assets/scss/style.scss";
 import * as serviceWorker from "./serviceWorker";
 
 import { composeWithDevTools } from "redux-devtools-extension";
+import LoadingSpinner from "./components/Loader/LoadingSpinner";
 
 const store = createStore(
   rootReducer,
@@ -27,7 +28,7 @@ store.dispatch(fetchProducts(products));
 ReactDOM.render(
   <Provider store={store}>
     <App />
-  </Provider>,
+   </Provider>,
   document.getElementById("root")
 );
 

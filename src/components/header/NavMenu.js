@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import { multilanguage } from "redux-multilanguage";
 
 const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
+  const handleCategoryToShop = () =>{
+    {localStorage.setItem("categoryId", 0)}
+  }
   return (
     <div
       className={` ${
@@ -15,14 +18,11 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
       <nav>
         <ul>
           <li>
-            <Link to={process.env.PUBLIC_URL + "/"}>
-              {strings["home"]}
-            </Link>
+            <Link to={process.env.PUBLIC_URL + "/"}>{strings["home"]}</Link>
           </li>
-  
 
           <li>
-            <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
+            <Link onClick={handleCategoryToShop} to={process.env.PUBLIC_URL + "/shop"}>
               {strings["collection"]}
             </Link>
           </li>
@@ -48,7 +48,7 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
                   {strings["checkout"]}
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to={process.env.PUBLIC_URL + "/wishlist"}>
                   {strings["wishlist"]}
                 </Link>
@@ -67,25 +67,25 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
                 <Link to={process.env.PUBLIC_URL + "/login-register"}>
                   {strings["login_register"]}
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link to={process.env.PUBLIC_URL + "/about"}>
                   {strings["about_us"]}
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to={process.env.PUBLIC_URL + "/contact"}>
                   {strings["contact_us"]}
                 </Link>
-              </li>
+              </li> */}
               <li>
-                <Link to={process.env.PUBLIC_URL + "/not-found"}>
+                {/* <Link to={process.env.PUBLIC_URL + "/not-found"}>
                   {strings["404_page"]}
-                </Link>
+                </Link> */}
               </li>
             </ul>
           </li>
-         
+
           <li>
             <Link to={process.env.PUBLIC_URL + "/contact"}>
               {strings["contact_us"]}
@@ -100,7 +100,7 @@ const NavMenu = ({ strings, menuWhiteClass, sidebarMenu }) => {
 NavMenu.propTypes = {
   menuWhiteClass: PropTypes.string,
   sidebarMenu: PropTypes.bool,
-  strings: PropTypes.object
+  strings: PropTypes.object,
 };
 
 export default multilanguage(NavMenu);

@@ -20,7 +20,7 @@ const ProductGrid = ({
 }) => {
   return (
     <Fragment>
-      {products.map(product => {
+      {products?.map(product => {
         return (
           <ProductGridListSingle
             sliderClassName={sliderClassName}

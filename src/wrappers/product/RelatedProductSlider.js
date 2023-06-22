@@ -40,7 +40,7 @@ const RelatedProductSlider = ({ spaceBottomClass, category }) => {
         <div className="row">
           <Swiper {...settings}>
             <ProductGrid
-              category={category}
+              category={"Cartas Magic"}
               limit={6}
               sliderClassName="swiper-slide"
             />

@@ -2,18 +2,24 @@ import PropTypes from "prop-types";
 import React from "react";
 import { setActiveSort } from "../../helpers/product";
 
+// const ShopCategories = ({ categories, getSortParams, getCategoryId }) => {
 const ShopCategories = ({ categories, getSortParams }) => {
+  var newCategories = JSON.parse(localStorage.getItem("category"));
   return (
     <div className="sidebar-widget">
-      <h4 className="pro-sidebar-title">Categories </h4>
+      <h4 className="pro-sidebar-title">Categories</h4>
       <div className="sidebar-widget-list mt-30">
         {categories ? (
           <ul>
             <li>
               <div className="sidebar-widget-list-left">
                 <button
-                  onClick={e => {
-                    getSortParams("category", "");
+                  className={
+                    localStorage.getItem("categoryId") == 0 ? "active" : ""
+                  }
+                  onClick={(e) => {
+                    // getSortParams("category", "");
+                    getSortParams("category", "All");
                     setActiveSort(e);
                   }}
                 >
@@ -21,7 +27,31 @@ const ShopCategories = ({ categories, getSortParams }) => {
                 </button>
               </div>
             </li>
-            {categories.map((category, key) => {
+            {newCategories.map((category, key) => {
+              return (
+                <li key={key}>
+                  <div className="sidebar-widget-list-left">
+                    <button
+                      className={
+                        localStorage.getItem("categoryId") ==
+                        category.CategoryID
+                          ? "active"
+                          : ""
+                      }
+                      onClick={(e) => {
+                        getSortParams("category", category.Name);
+                        // getCategoryId(category.CategoryID);
+                        setActiveSort(e);
+                      }}
+                    >
+                      {" "}
+                      <span className="checkmark" /> {category.Name}{" "}
+                    </button>
+                  </div>
+                </li>
+              );
+            })}
+            {/* {categories.map((category, key) => {
               return (
                 <li key={key}>
                   <div className="sidebar-widget-list-left">
@@ -37,7 +67,7 @@ const ShopCategories = ({ categories, getSortParams }) => {
                   </div>
                 </li>
               );
-            })}
+            })} */}
           </ul>
         ) : (
           "No categories found"
@@ -49,7 +79,7 @@ const ShopCategories = ({ categories, getSortParams }) => {
 
 ShopCategories.propTypes = {
   categories: PropTypes.array,
-  getSortParams: PropTypes.func
+  getSortParams: PropTypes.func,
 };
 
 export default ShopCategories;

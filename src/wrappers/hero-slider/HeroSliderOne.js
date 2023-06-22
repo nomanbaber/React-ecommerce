@@ -14,8 +14,8 @@ const HeroSliderOne = () => {
                 <p>25% Off On All Products</p>
             </div>
             <div className='banner-inputs pb-3'>
-              <a href='/shop-grid-standard' className='button btn-1 custom-banner-c'>Shop Now</a>
-              <a href='/shop-grid-standard' className='button btn-2 custom-banner-c'>Find More</a>
+              <a href='/shop' className='button btn-1 custom-banner-c'>Shop Now</a>
+              <a href='/shop' className='button btn-2 custom-banner-c'>Find More</a>
             </div>
         </div>
         </div>

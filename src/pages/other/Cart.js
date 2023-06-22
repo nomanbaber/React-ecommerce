@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useToasts } from "react-toast-notifications";
 import MetaTags from "react-meta-tags";
@@ -28,6 +28,38 @@ const Cart = ({
   const [quantityCount] = useState(1);
   const { addToast } = useToasts();
   const { pathname } = location;
+  var countryData = [
+    { value: 'Arica and Parinacota', name: 'Arica and Parinacota' },
+    { value: 'Tarapacá', name: 'Tarapacá' },
+    { value: 'Antofagasta', name: 'Antofagasta' },
+    { value: 'Atacama', name: 'Atacama' },
+    { value: 'Valparaíso', name: 'Valparaíso' },
+    { value: 'Maule', name: 'Maule' },
+    { value: 'Ñuble', name: 'Ñuble' }
+  ];
+  var [shippingType, setShippingType] = useState([]);
+  useEffect(() => {
+
+    fetchData();
+
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch("https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/ShippingOptions/GetShippingOptions");
+      const jsonData = await response.json();
+      console.error('jsonData setShippingType data:', jsonData.Data);
+
+
+      setShippingType(jsonData.Data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+
+
+
   let cartTotalPrice = 0;
 
   return (
@@ -69,12 +101,17 @@ const Cart = ({
                         </thead>
                         <tbody>
                           {cartItems.map((cartItem, key) => {
+
+                            console.log("cartItemscartItemscartItems", cartItems, key)
+                            // deleteFromCart(cartItem, addToast)
+
+
                             const discountedPrice = getDiscountPrice(
-                              cartItem.price,
+                              cartItem.Price,
                               cartItem.discount
                             );
                             const finalProductPrice = (
-                              cartItem.price * currency.currencyRate
+                              cartItem.Price * currency.currencyRate
                             ).toFixed(2);
                             const finalDiscountedPrice = (
                               discountedPrice * currency.currencyRate
@@ -82,9 +119,9 @@ const Cart = ({
 
                             discountedPrice != null
                               ? (cartTotalPrice +=
-                                  finalDiscountedPrice * cartItem.quantity)
+                                finalDiscountedPrice * cartItem.quantity)
                               : (cartTotalPrice +=
-                                  finalProductPrice * cartItem.quantity);
+                                finalProductPrice * cartItem.quantity);
                             return (
                               <tr key={key}>
                                 <td className="product-thumbnail">
@@ -99,7 +136,7 @@ const Cart = ({
                                       className="img-fluid"
                                       src={
                                         process.env.PUBLIC_URL +
-                                        cartItem.image[0]
+                                        cartItem.ImgLocations[0]
                                       }
                                       alt=""
                                     />
@@ -111,13 +148,13 @@ const Cart = ({
                                     to={
                                       process.env.PUBLIC_URL +
                                       "/product/" +
-                                      cartItem.id
+                                      cartItem.ArticleID
                                     }
                                   >
-                                    {cartItem.name}
+                                    {cartItem.Title}
                                   </Link>
                                   {cartItem.selectedProductColor &&
-                                  cartItem.selectedProductSize ? (
+                                    cartItem.selectedProductSize ? (
                                     <div className="cart-item-variation">
                                       <span>
                                         Color: {cartItem.selectedProductColor}
@@ -180,11 +217,11 @@ const Cart = ({
                                         cartItem !== undefined &&
                                         cartItem.quantity &&
                                         cartItem.quantity >=
-                                          cartItemStock(
-                                            cartItem,
-                                            cartItem.selectedProductColor,
-                                            cartItem.selectedProductSize
-                                          )
+                                        cartItemStock(
+                                          cartItem,
+                                          cartItem.selectedProductColor,
+                                          cartItem.selectedProductSize
+                                        )
                                       }
                                     >
                                       +
@@ -194,13 +231,13 @@ const Cart = ({
                                 <td className="product-subtotal">
                                   {discountedPrice !== null
                                     ? currency.currencySymbol +
-                                      (
-                                        finalDiscountedPrice * cartItem.quantity
-                                      ).toFixed(2)
+                                    (
+                                      finalDiscountedPrice * cartItem.quantity
+                                    ).toFixed(2)
                                     : currency.currencySymbol +
-                                      (
-                                        finalProductPrice * cartItem.quantity
-                                      ).toFixed(2)}
+                                    (
+                                      finalProductPrice * cartItem.quantity
+                                    ).toFixed(2)}
                                 </td>
 
                                 <td className="product-remove">
@@ -225,7 +262,7 @@ const Cart = ({
                     <div className="cart-shiping-update-wrapper">
                       <div className="cart-shiping-update">
                         <Link
-                          to={process.env.PUBLIC_URL + "/shop-grid-standard"}
+                          to={process.env.PUBLIC_URL + "/shop"}
                         >
                           Continue Shopping
                         </Link>
@@ -252,7 +289,7 @@ const Cart = ({
                           Enter your destination to get a shipping estimate.
                         </p>
                         <div className="tax-select-wrapper">
-                          <div className="tax-select">
+                          {/* <div className="tax-select">
                             <label>* Country</label>
                             <select className="email s-email s-wid">
                               <option>Bangladesh</option>
@@ -261,22 +298,37 @@ const Cart = ({
                               <option>Afghanistan</option>
                               <option>Belgium</option>
                             </select>
-                          </div>
+                          </div> */}
                           <div className="tax-select">
-                            <label>* Region / State</label>
-                            <select className="email s-email s-wid">
-                              <option>Bangladesh</option>
-                              <option>Albania</option>
-                              <option>Åland Islands</option>
-                              <option>Afghanistan</option>
-                              <option>Belgium</option>
+                            <label>* Region </label>
+                            <select name="country" value={countryData}>
+                              {countryData.map((e, key) => {
+                                return <option key={key} value={e.value}>{e.name}</option>;
+                              })}
                             </select>
                           </div>
                           <div className="tax-select">
-                            <label>* Zip/Postal Code</label>
-                            <input type="text" />
+                            <label>*Type</label>
+
+                            <select id="ddlViewBy" name="country" value={shippingType}   >
+                              {shippingType.map((e, index) => {
+                                return <option key={index} value={e.Type}>{e.Type}</option>;
+                                
+                              })}
+                            </select>
+                            {/* <input type="text" /> */}
                           </div>
-                          <button className="cart-btn-2" type="submit">
+                          <button className="cart-btn-2" type="submit" onClick={() => {
+                            var e = document.getElementById("ddlViewBy");
+                            var value = e.options[e.selectedIndex].value;
+                            console.log("price is", value)
+
+                          }
+
+
+
+                          }
+                          >
                             Get A Quote
                           </button>
                         </div>
@@ -284,7 +336,7 @@ const Cart = ({
                     </div>
                   </div>
 
-                  <div className="col-lg-4 col-md-6">
+                  {/* <div className="col-lg-4 col-md-6">
                     <div className="discount-code-wrapper">
                       <div className="title-wrap">
                         <h4 className="cart-bottom-title section-bg-gray">
@@ -301,7 +353,7 @@ const Cart = ({
                         </form>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
 
                   <div className="col-lg-4 col-md-12">
                     <div className="grand-totall">
@@ -339,7 +391,7 @@ const Cart = ({
                     </div>
                     <div className="item-empty-area__text">
                       No items found in cart <br />{" "}
-                      <Link to={process.env.PUBLIC_URL + "/shop-grid-standard"}>
+                      <Link to={process.env.PUBLIC_URL + "/shop"}>
                         Shop Now
                       </Link>
                     </div>

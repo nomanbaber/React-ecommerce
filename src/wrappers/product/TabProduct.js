@@ -13,6 +13,7 @@ const TabProduct = ({
 }) => {
   return (
     <div
+    
       className={`product-area ${spaceTopClass ? spaceTopClass : ""} ${
         spaceBottomClass ? spaceBottomClass : ""
       } ${bgColorClass ? bgColorClass : ""}`}
@@ -34,11 +35,11 @@ const TabProduct = ({
                 <h4>Best Sellers</h4>
               </Nav.Link>
             </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="saleItems">
+            {/* <Nav.Item> */}
+              {/* <Nav.Link eventKey="saleItems">
                 <h4>Sale Items</h4>
               </Nav.Link>
-            </Nav.Item>
+            </Nav.Item> */}
           </Nav>
           <Tab.Content>
             <Tab.Pane eventKey="newArrival">

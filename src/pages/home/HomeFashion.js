@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import MetaTags from "react-meta-tags";
 import LayoutOne from "../../layouts/LayoutOne";
 import HeroSliderOne from "../../wrappers/hero-slider/HeroSliderOne";
@@ -6,8 +6,12 @@ import FeatureIcon from "../../wrappers/feature-icon/FeatureIcon";
 import TabProduct from "../../wrappers/product/TabProduct";
 import BlogFeatured from "../../wrappers/blog-featured/BlogFeatured";
 import Categories from "../../components/category/categories/Categories"
-
+import LoadingSpinner from "../../components/Loader/LoadingSpinner";
+ 
 const HomeFashion = () => {
+
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <Fragment>
       <MetaTags>
@@ -24,7 +28,7 @@ const HomeFashion = () => {
         {/* hero slider */}
         <HeroSliderOne />
 
-       
+        {/* <LoadingSpinner />  */}
 
         {/* featured icon */}
         <FeatureIcon spaceTopClass="pt-100" spaceBottomClass="pb-60" />

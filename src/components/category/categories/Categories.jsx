@@ -1,14 +1,13 @@
-
-import icon_1 from "../../../assets/img/cat-1.webp"
-import icon_2 from "../../../assets/img/cat-2.webp"
-import icon_3 from "../../../assets/img/cat-3.webp"
-import icon_4 from "../../../assets/img/cat-4.webp"
-import icon_5 from "../../../assets/img/cat-5.webp"
-import icon_6 from "../../../assets/img/cat-6.webp"
-import icon_7 from "../../../assets/img/cat-7.webp"
-import icon_8 from "../../../assets/img/cat-8.webp"
-import icon_9 from "../../../assets/img/cat-9.webp"
-import './Categories.css'
+import icon_1 from "../../../assets/img/cat-1.webp";
+import icon_2 from "../../../assets/img/cat-2.webp";
+import icon_3 from "../../../assets/img/cat-3.webp";
+import icon_4 from "../../../assets/img/cat-4.webp";
+import icon_5 from "../../../assets/img/cat-5.webp";
+import icon_6 from "../../../assets/img/cat-6.webp";
+import icon_7 from "../../../assets/img/cat-7.webp";
+import icon_8 from "../../../assets/img/cat-8.webp";
+import icon_9 from "../../../assets/img/cat-9.webp";
+import "./Categories.css";
 import React, { useEffect, useState } from "react";
 
 const Categories = () => {
@@ -17,15 +16,18 @@ const Categories = () => {
     fetchData();
   }, []);
 
-const fetchData = async () => {
-  try {
-    const response = await fetch('https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Categories/GetCategories');
-    const jsonData = await response.json();
-    setRecords(jsonData.Data);
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-};
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        "https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Categories/GetCategories"
+      );
+      const jsonData = await response.json();
+      localStorage.setItem("category", JSON.stringify(jsonData.Data));
+      setRecords(jsonData.Data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   const options = {
     margin: 20,
@@ -102,37 +104,45 @@ const fetchData = async () => {
       icon: icon_8,
       title: "Shoes",
     },
-  ]
+  ];
+  const handleCategoryToProduct = (categoryId) => {
+    localStorage.setItem("categoryId", categoryId);
+    window.location.href = "/shop";
+  };
   return (
     <>
-    <section className='categories-wrapper'>
-      <div className='container'>
-        <div className='categories-mains'>
-            <div className='categories-heading'>
-                <h2>Categories</h2>
+      <section className="categories-wrapper">
+        <div className="container">
+          <div className="categories-mains">
+            <div className="categories-heading">
+              <h2>Categories</h2>
             </div>
-        </div>
+          </div>
 
-        <div className="row">
-              {records.map((item) => (
-                <div className='col-md-3 mt-3'>
+          <div className="row">
+            {records.map((item, index) => (
+              <div
+                className="col-md-3 mt-3"
+                key={index}
+                onClick={() => handleCategoryToProduct(item.CategoryID)}
+              >
+                {/* <a href={`/shop`} > */}
                 <div className="item">
                   <div className="save-time">
                     <div className="save-icon">
-                      <img src="/static/media/cat-7.8590f56e.webp" alt="" />
-                      </div>
-                      <p className="text-center save-text pt-3">{item.Name}</p>
-                   
+                      <img src={item.ImgLocation} alt="" />
+                    </div>
+                    <p className="text-center save-text pt-3">{item.Name}</p>
                   </div>
                 </div>
-                </div>
-              ))}
+                {/* </a> */}
+              </div>
+            ))}
+          </div>
         </div>
-
-    </div>
-    </section>
+      </section>
     </>
-  )
-}
+  );
+};
 
-export default Categories
+export default Categories;

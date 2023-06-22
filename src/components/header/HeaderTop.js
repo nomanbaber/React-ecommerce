@@ -18,12 +18,13 @@ const HeaderTop = ({
         borderStyle === "fluid-border" ? "border-bottom" : ""
       }`}
     >
-      <LanguageCurrencyChanger
+      {/* <LanguageCurrencyChanger
         currency={currency}
         setCurrency={setCurrency}
         currentLanguageCode={currentLanguageCode}
         dispatch={dispatch}
-      />
+      /> */}
+      <div className="language-currency-wrap"></div>
       <div className="header-offer">
         <p>
           Free delivery on order over{" "}

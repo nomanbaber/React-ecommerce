@@ -32,6 +32,7 @@ section.categories-wrapper {
     align-items: center;
     margin: 0 auto;
     overflow: hidden;
+    cursor: pointer;
 }
 .save-icon img {
     object-fit: contain;
@@ -39,6 +40,8 @@ section.categories-wrapper {
 .save-time p {
     color: #0D2B4B;
     font-weight: 600;
+    cursor: pointer;
+
 }
 .owl-stage-outer.owl-height {
     padding: 10px 10px;

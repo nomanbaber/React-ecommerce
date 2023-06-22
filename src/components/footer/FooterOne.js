@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { animateScroll } from "react-scroll";
 import FooterCopyright from "../../components/footer/FooterCopyright";
-import FooterNewsletter from "../../components/footer/FooterNewsletter";
+import shop from "../../components/footer/shop";
 
 const FooterOne = ({
   backgroundColorClass,
@@ -71,21 +71,21 @@ const FooterOne = ({
                   <li>
                     <Link to={process.env.PUBLIC_URL + "/about"}>About us</Link>
                   </li>
-                  {/* <li>
+                  <li>
                     <Link to={process.env.PUBLIC_URL + "#/"}>
                       Store location
                     </Link>
-                  </li> */}
+                  </li>
                   <li>
                     <Link to={process.env.PUBLIC_URL + "/contact"}>
                       Contact
                     </Link>
                   </li>
-                  {/* <li>
+                  <li>
                     <Link to={process.env.PUBLIC_URL + "#/"}>
                       Orders tracking
                     </Link>
-                  </li> */}
+                  </li>
                 </ul>
               </div>
             </div>
@@ -182,18 +182,18 @@ const FooterOne = ({
               </div>
             </div>
           </div>
-          {/* <div
+          <div
             className={`${
               sideMenu ? "col-xl-3 col-sm-8" : "col-lg-4 col-sm-6"
             }`}
           >
-             footer newsletter  
-            <FooterNewsletter
+            {/* footer newsletter */}
+            {/* <shop
               spaceBottomClass="mb-30"
               spaceLeftClass="ml-70"
               sideMenu={sideMenu}
-            />
-          </div> */}
+            /> */}
+          </div>
         </div>
       </div>
       <button

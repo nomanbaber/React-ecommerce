@@ -6,6 +6,7 @@ import { ToastProvider } from "react-toast-notifications";
 import { multilanguage, loadLanguages } from "redux-multilanguage";
 import { connect } from "react-redux";
 import { BreadcrumbsProvider } from "react-breadcrumbs-dynamic";
+import LoadingSpinner from "./components/Loader/LoadingSpinner";
 
 // home pages
 const HomeFashion = lazy(() => import("./pages/home/HomeFashion"));
@@ -57,7 +58,9 @@ const App = (props) => {
   });
 
   return (
+ 
     <ToastProvider placement="bottom-left">
+      
       <BreadcrumbsProvider>
         <Router>
           <ScrollToTop>
@@ -83,7 +86,7 @@ const App = (props) => {
 
                 {/* Shop pages */}
                 <Route
-                  path={process.env.PUBLIC_URL + "/shop-grid-standard"}
+                  path={process.env.PUBLIC_URL + "/shop"}
                   component={ShopGridStandard}
                 />
 
@@ -168,7 +171,9 @@ const App = (props) => {
         </Router>
       </BreadcrumbsProvider>
     </ToastProvider>
+    
   );
+  
 };
 
 App.propTypes = {
