@@ -35,7 +35,10 @@ section.categories-wrapper {
     cursor: pointer;
 }
 .save-icon img {
-    object-fit: contain;
+     width:100%;
+     height:100%;
+     object-fit:cover;
+
 }
 .save-time p {
     color: #0D2B4B;

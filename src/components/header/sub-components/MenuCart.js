@@ -15,7 +15,7 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
             {cartData.map((single, key) => {
               const discountedPrice = getDiscountPrice(
                 single.Price,
-                single.discount
+                single.PreviousPrice
               );
               const finalProductPrice = (
                 single.Price * currency.currencyRate
@@ -30,11 +30,11 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
               return (
                 <li className="single-shopping-cart" key={key}>
                   <div className="shopping-cart-img">
-                    <Link to={process.env.PUBLIC_URL + "/product/" + single.id}>
+                    <Link to={process.env.PUBLIC_URL + "/product/" + single.ArticleID}>
                       <img
                         alt=""
                         // src={process.env.PUBLIC_URL + single.image[0]}
-                        // src={process.env.PUBLIC_URL + single.ImgLocations[0]}
+                         src={process.env.PUBLIC_URL + single.ImgLocations[key]}
                         className="img-fluid"
                       />
                     </Link>
@@ -42,10 +42,10 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
                   <div className="shopping-cart-title">
                     <h4>
                       <Link
-                        to={process.env.PUBLIC_URL + "/product/" + single.id}
+                        to={process.env.PUBLIC_URL + "/product/" + single.ArticleID}
                       >
                         {" "}
-                        {single.name}{" "}
+                        {single.Title}{" "}
                       </Link>
                     </h4>
                     <h6>Qty: {single.quantity}</h6>
@@ -54,6 +54,7 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
                         ? currency.currencySymbol + finalDiscountedPrice
                         : currency.currencySymbol + finalProductPrice}
                     </span>
+                    
                     {single.selectedProductColor &&
                     single.selectedProductSize ? (
                       <div className="cart-item-variation">
@@ -76,6 +77,7 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
           <div className="shopping-cart-total">
             <h4>
               Total :{" "}
+              
               <span className="shop-total">
                 {currency.currencySymbol + cartTotalPrice.toFixed(2)}
               </span>

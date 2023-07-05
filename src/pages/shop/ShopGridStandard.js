@@ -12,6 +12,7 @@ import ShopTopbar from "../../wrappers/product/ShopTopbar";
 import ShopProducts from "../../wrappers/product/ShopProducts";
 import axios from "axios";
 import ProductGrid from "../../wrappers/product/ProductGrid";
+import { GetPromotedItems } from "../../helpers/Constant";
 
 const ShopGridStandard = ({ location, products }) => {
   const [layout, setLayout] = useState("grid three-column");
@@ -73,7 +74,7 @@ const ShopGridStandard = ({ location, products }) => {
     var url1 = "";
     if (localStorage.getItem("categoryId") == 0) {
       url1 =
-        "https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetPromotedItems";
+        GetPromotedItems;
       setUrl(url1);
     } else {
       url1 = `https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetArticlesByCategory?categoryIds=${localStorage.getItem(
@@ -93,7 +94,7 @@ const ShopGridStandard = ({ location, products }) => {
   const getAllProducts = () => {
     axios
       .get(
-        `https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetPromotedItems`
+        GetPromotedItems
       )
       .then((response) => {
         setAllProducts(response.data.Data);

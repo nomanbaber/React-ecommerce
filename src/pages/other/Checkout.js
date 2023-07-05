@@ -11,6 +11,7 @@ import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 const Checkout = ({ location, cartItems, currency }) => {
   const { pathname } = location;
   let cartTotalPrice = 0;
+  const ShippingPriceData = JSON.parse(localStorage.getItem("ShippingPrice"));
 
   return (
     <Fragment>
@@ -143,7 +144,7 @@ const Checkout = ({ location, cartItems, currency }) => {
                             {cartItems.map((cartItem, key) => {
                               const discountedPrice = getDiscountPrice(
                                 cartItem.price,
-                                cartItem.discount
+                                cartItem.PreviousPrice
                               );
                               const finalProductPrice = (
                                 cartItem.Price * currency.currencyRate
@@ -156,11 +157,11 @@ const Checkout = ({ location, cartItems, currency }) => {
                                 ? (cartTotalPrice +=
                                     finalDiscountedPrice * cartItem.quantity)
                                 : (cartTotalPrice +=
-                                    finalProductPrice * cartItem.quantity);
+                                  ShippingPriceData + finalProductPrice * cartItem.quantity);
                               return (
                                 <li key={key}>
                                   <span className="order-middle-left">
-                                    {cartItem.name} X {cartItem.quantity}
+                                    {cartItem.Title} X {cartItem.quantity}
                                   </span>{" "}
                                   <span className="order-price">
                                     {discountedPrice !== null
@@ -182,15 +183,15 @@ const Checkout = ({ location, cartItems, currency }) => {
                         <div className="your-order-bottom">
                           <ul>
                             <li className="your-order-shipping">Shipping</li>
-                            <li>Free shipping</li>
+                            <li>{ "$" + ShippingPriceData }</li>
                           </ul>
                         </div>
                         <div className="your-order-total">
                           <ul>
                             <li className="order-total">Total</li>
                             <li>
-                              {currency.currencySymbol +
-                                cartTotalPrice.toFixed(2)}
+                              { currency.currencySymbol +
+                                cartTotalPrice.toFixed(2) }
                             </li>
                           </ul>
                         </div>

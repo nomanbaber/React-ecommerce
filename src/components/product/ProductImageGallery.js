@@ -69,17 +69,17 @@ const ProductImageGallery = ({ product }) => {
           ""
         )}
         <LightgalleryProvider>
-      {  console.log("singlesinglesingle", product)}
+          {console.log("singlesinglesingle", product)}
 
           <Swiper {...gallerySwiperParams}>
 
-            
+
             {product.ImgLocations &&
               product.ImgLocations.map((single, key) => {
 
-                {  console.log("singlesinglesingle", key)}
+                { console.log("singlesinglesingle", key) }
 
-                {console.log("adsdadas" , key)}
+                { console.log("adsdadas", key) }
 
                 return (
                   <div key={key}>
@@ -93,7 +93,13 @@ const ProductImageGallery = ({ product }) => {
                     </LightgalleryItem>
                     <div className="single-image">
                       <img
-                        src={process.env.PUBLIC_URL   + product.ImgLocations[key]}
+                       onError={(e) =>
+                        
+                        (e.target.src =
+                          "https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png")
+                      
+                    }
+                        src={process.env.PUBLIC_URL + product.ImgLocations[key]}
                         className="img-fluid"
                         alt=""
                       />
@@ -104,24 +110,35 @@ const ProductImageGallery = ({ product }) => {
           </Swiper>
         </LightgalleryProvider>
       </div>
-      <div className="product-small-image-wrapper mt-15">
+      {/* <div className="product-small-image-wrapper mt-15">
         <Swiper {...thumbnailSwiperParams}>
-          {product.ImgLocations &&
+
+           {product.ImgLocations &&
             product.ImgLocations.map((single, key) => {
               return (
                 <div key={key}>
                   <div className="single-image">
                     <img
-                      src={process.env.PUBLIC_URL +  product.ImgLocations[key]}
+                       onError={(e) =>
+                        
+                          (e.target.src =
+                            "https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png")
+                        
+                      }
+                      src={process.env.PUBLIC_URL + product.ImgLocations[key]}
                       className="img-fluid"
-                      alt=""
+                      alt="" 
+                     
                     />
+                     
+
+
                   </div>
                 </div>
               );
             })}
         </Swiper>
-      </div>
+      </div> */}
     </Fragment>
   );
 };

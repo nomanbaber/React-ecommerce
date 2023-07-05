@@ -7,6 +7,7 @@ import icon_6 from "../../../assets/img/cat-6.webp";
 import icon_7 from "../../../assets/img/cat-7.webp";
 import icon_8 from "../../../assets/img/cat-8.webp";
 import icon_9 from "../../../assets/img/cat-9.webp";
+import { getCategories } from "../../../helpers/Constant";
 import "./Categories.css";
 import React, { useEffect, useState } from "react";
 
@@ -19,7 +20,7 @@ const Categories = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Categories/GetCategories"
+       getCategories
       );
       const jsonData = await response.json();
       localStorage.setItem("category", JSON.stringify(jsonData.Data));

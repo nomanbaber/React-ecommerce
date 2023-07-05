@@ -1,20 +1,31 @@
 import React, { useState } from "react";
+import { GetPromotedItems } from "../../helpers/Constant";
 
-const ShopSearch = ({handleSearchProducts}) => {
+const ShopSearch = ({ handleSearchProducts }) => {
   const [searchText, setSearchText] = useState("");
   const [records, setRecords] = useState([]);
   const handleSearch = async (e) => {
-    setSearchText(e.target.value);
-    try {
-      const response = await fetch(`https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetArticlesByName?articleName=${e.target.value}`);
-      const jsonData = await response.json();
-      setRecords(jsonData.Data);
-      handleSearchProducts(jsonData.Data)
-      console.error('handleSearch data:', jsonData.Data);
-
-
-    } catch (error) {
-      console.error('Error fetching data:', error);
+    if (e.target.value === "") {
+      try {
+        const response = await fetch(GetPromotedItems);
+        const jsonData = await response.json();
+        setRecords(jsonData.Data);
+        handleSearchProducts(jsonData.Data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    } else {
+      try {
+        const response = await fetch(
+          `https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetArticlesByName?articleName=${e.target.value}`
+        );
+        const jsonData = await response.json();
+        setRecords(jsonData.Data);
+        handleSearchProducts(jsonData.Data);
+        console.error("handleSearch data:", jsonData.Data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     }
   };
   return (

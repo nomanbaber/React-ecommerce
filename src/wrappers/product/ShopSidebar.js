@@ -13,6 +13,7 @@ import ShopSize from "../../components/product/ShopSize";
 import ShopTag from "../../components/product/ShopTag";
 import MultiRangeSlider from "../../components/price-range/MultiRangeSlider";
 import { useState } from "react";
+import { BaseUrl } from "../../helpers/Constant";
 
 const ShopSidebar = ({
   products,
@@ -28,6 +29,7 @@ const ShopSidebar = ({
   const [minVal, setMinVal] = useState(0);
   const [maxVal, setMaxVal] = useState(10000);
   const [catId, setCatId] = useState();
+  
   const handleFilterPrice = async (minVal, maxVal) => {
     // console.log(catId);
     // let categoryIdForApi;
@@ -39,7 +41,7 @@ const ShopSidebar = ({
     // console.log("categoryIdForApi", categoryIdForApi);
     try {
       const response = await fetch(
-        `https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetArticlesByCategory?minPrice=${minVal}&maxPrice=${maxVal}&categoryIds=${localStorage.getItem(
+       BaseUrl +  `Articles/GetArticlesByCategory?minPrice=${minVal}&maxPrice=${maxVal}&categoryIds=${localStorage.getItem(
           "categoryId"
         )}`
         // `https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetArticlesByCategory?minPrice=${minVal}&maxPrice=${maxVal}&categoryIds=${categoryIdForApi}`

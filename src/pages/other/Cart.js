@@ -15,6 +15,7 @@ import {
 } from "../../redux/actions/cartActions";
 import LayoutOne from "../../layouts/LayoutOne";
 import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
+import { GetShippingDetail } from "../../helpers/Constant";
 
 const Cart = ({
   location,
@@ -37,7 +38,38 @@ const Cart = ({
     { value: 'Maule', name: 'Maule' },
     { value: 'Ñuble', name: 'Ñuble' }
   ];
+
+
+  const getInitialState = () => {
+    const value = "Orange";
+    return value;
+  };
+
+  const [value, setValue] = useState(getInitialState);
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+
+        localStorage.setItem('ShippingPrice', e.target.value);
+
+
+        // console.log("previousData" , previousData)
+
+     // var e = document.getElementById("ddlViewBy");
+    // var value = e.options[e.selectedIndex].value;
+    // console.log("price is for change", value)
+    // setshippingPrice = 100
+
+
+
+  };
+
+
   var [shippingType, setShippingType] = useState([]);
+
+
+  var [shippingPrice, setshippingPrice] = useState(0);
+
   useEffect(() => {
 
     fetchData();
@@ -46,12 +78,16 @@ const Cart = ({
 
   const fetchData = async () => {
     try {
-      const response = await fetch("https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/ShippingOptions/GetShippingOptions");
+      const response = await fetch(GetShippingDetail);
       const jsonData = await response.json();
       console.error('jsonData setShippingType data:', jsonData.Data);
 
 
       setShippingType(jsonData.Data);
+
+      setValue(jsonData.Data[0].Price);
+
+
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -102,7 +138,7 @@ const Cart = ({
                         <tbody>
                           {cartItems.map((cartItem, key) => {
 
-                            console.log("cartItemscartItemscartItems", cartItems, key)
+                            // console.log("cartItemscartItemscartItems", cartItems, key)
                             // deleteFromCart(cartItem, addToast)
 
 
@@ -129,7 +165,7 @@ const Cart = ({
                                     to={
                                       process.env.PUBLIC_URL +
                                       "/product/" +
-                                      cartItem.id
+                                      cartItem.ArticleID
                                     }
                                   >
                                     <img
@@ -301,7 +337,7 @@ const Cart = ({
                           </div> */}
                           <div className="tax-select">
                             <label>* Region </label>
-                            <select name="country" value={countryData}>
+                            <select name="country"  >
                               {countryData.map((e, key) => {
                                 return <option key={key} value={e.value}>{e.name}</option>;
                               })}
@@ -310,27 +346,43 @@ const Cart = ({
                           <div className="tax-select">
                             <label>*Type</label>
 
-                            <select id="ddlViewBy" name="country" value={shippingType}   >
+                            <select id="ddlViewBy" name="country" value={value} onChange={handleChange}  >
                               {shippingType.map((e, index) => {
-                                return <option key={index} value={e.Type}>{e.Type}</option>;
-                                
+                                setShippingType = e.Type
+
+                                // { console.log("shipping rte", shippingType) }
+
+                                return <option key={index} value={e.Price}>{e.Type}</option>;
+
                               })}
                             </select>
-                            {/* <input type="text" /> */}
+
+
                           </div>
-                          <button className="cart-btn-2" type="submit" onClick={() => {
-                            var e = document.getElementById("ddlViewBy");
-                            var value = e.options[e.selectedIndex].value;
-                            console.log("price is", value)
+                          <div className="tax-select">
+
+                            <label>*Price</label>
+
+                            <input style={{ alignSelf: "center" }}
+                              className="cart-plus-minus-box"
+                              type="text"
+                              value={"$ " + value}
+                              readOnly
+                            />
+                          </div>
+                          {/* <button className="cart-btn-2" type="submit" onClick={() => {
 
                           }
 
 
 
                           }
+
                           >
+
                             Get A Quote
-                          </button>
+                          </button> */}
+
                         </div>
                       </div>
                     </div>

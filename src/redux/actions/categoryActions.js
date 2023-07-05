@@ -1,11 +1,12 @@
 import axios from "axios";
+import { getCategories } from "../../helpers/Constant";
 export const GET_CATEGORY = "GET_CATEGORY";
 
 export const getCategory = () => {
   return (dispatch) => {
     axios
       .get(
-        `https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Categories/GetCategories"`
+        getCategories
       )
       .then((response) => {
         dispatch({

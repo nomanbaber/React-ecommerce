@@ -4,6 +4,7 @@ import Tab from "react-bootstrap/Tab";
 import Nav from "react-bootstrap/Nav";
 import SectionTitle from "../../components/section-title/SectionTitle";
 import ProductGrid from "./ProductGrid";
+import { GetPromotedItems, getAllArticles } from "../../helpers/Constant";
 
 const TabProduct = ({
   spaceTopClass,
@@ -49,7 +50,7 @@ const TabProduct = ({
                   type="new"
                   limit={8}
                   spaceBottomClass="mb-25"
-                  apiURL = "https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetPromotedItems"
+                  apiURL = {GetPromotedItems}
                 />
               </div>
             </Tab.Pane>
@@ -60,7 +61,7 @@ const TabProduct = ({
                   type="bestSeller"
                   limit={8}
                   spaceBottomClass="mb-25"
-                  apiURL = "https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetPromotedItems"
+                  apiURL =  {GetPromotedItems}
                 />
               </div>
             </Tab.Pane>
@@ -71,7 +72,7 @@ const TabProduct = ({
                   type="saleItems"
                   limit={8}
                   spaceBottomClass="mb-25"
-                  apiURL = "https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetPromotedItems"
+                  apiURL =  {GetPromotedItems}
                 />
               </div>
             </Tab.Pane>

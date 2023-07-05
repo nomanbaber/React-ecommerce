@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom/cjs/react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import { getAllArticleByID, getAllArticles } from "../../helpers/Constant";
 
 // const Product = ({ location,Product }) => {
   const Product = ({ location }) => {
@@ -22,8 +23,10 @@ import { useState } from "react";
   const getProductDetails = () => {
     axios
       .get(
-        `https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetArticleByID?articleID=${params.id}`
-      )
+
+        getAllArticleByID +   params.id
+
+       )
       .then((response) => {
         setProduct(response.data.Data);
       })
