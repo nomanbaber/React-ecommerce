@@ -34,7 +34,10 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
                       <img
                         alt=""
                         // src={process.env.PUBLIC_URL + single.image[0]}
-                         src={process.env.PUBLIC_URL + single.ImgLocations[key]}
+                         src={process.env.PUBLIC_URL + single.ImgLocations[0]}
+
+                         {...console.log("single carrt" , single)}
+
                         className="img-fluid"
                       />
                     </Link>

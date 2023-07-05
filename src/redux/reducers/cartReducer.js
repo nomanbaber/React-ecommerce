@@ -14,14 +14,14 @@ const cartReducer = (state = initState, action) => {
 
   if (action.type === ADD_TO_CART) {
     // for non variant products
-    if (product.variation === undefined) {
-      const cartItem = cartItems.filter(item => item.id === product.id)[0];
+    if (product.ArticleID === undefined) {
+      const cartItem = cartItems.filter(item => item === product.id)[0];
       if (cartItem === undefined) {
         return [
           ...cartItems,
           {
-            ...product,
-            quantity: product.quantity ? product.quantity : 1,
+            ...product.ArticleID,
+            quantity: product.ArticleID.quantity ? product.ArticleID.quantity : 1,
             cartItemId: uuid()
           }
         ];
