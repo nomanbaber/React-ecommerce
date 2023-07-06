@@ -157,7 +157,7 @@ const Checkout = ({ location, cartItems, currency }) => {
                                 ? (cartTotalPrice +=
                                     finalDiscountedPrice * cartItem.quantity)
                                 : (cartTotalPrice +=
-                                  ShippingPriceData + finalProductPrice * cartItem.quantity);
+                                    finalProductPrice * cartItem.quantity);
                               return (
                                 <li key={key}>
                                   <span className="order-middle-left">
@@ -190,8 +190,8 @@ const Checkout = ({ location, cartItems, currency }) => {
                           <ul>
                             <li className="order-total">Total</li>
                             <li>
-                              { currency.currencySymbol +
-                                cartTotalPrice.toFixed(2) }
+                              { currency.currencySymbol + (cartTotalPrice + ShippingPriceData)
+                                 }
                             </li>
                           </ul>
                         </div>

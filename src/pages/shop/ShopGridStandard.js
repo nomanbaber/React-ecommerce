@@ -12,7 +12,7 @@ import ShopTopbar from "../../wrappers/product/ShopTopbar";
 import ShopProducts from "../../wrappers/product/ShopProducts";
 import axios from "axios";
 import ProductGrid from "../../wrappers/product/ProductGrid";
-import { GetPromotedItems } from "../../helpers/Constant";
+import { GetArticlesByCategory, GetPromotedItems } from "../../helpers/Constant";
 
 const ShopGridStandard = ({ location, products }) => {
   const [layout, setLayout] = useState("grid three-column");
@@ -77,9 +77,7 @@ const ShopGridStandard = ({ location, products }) => {
         GetPromotedItems;
       setUrl(url1);
     } else {
-      url1 = `https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetArticlesByCategory?categoryIds=${localStorage.getItem(
-        "categoryId"
-      )}`;
+      url1 =  GetArticlesByCategory + localStorage.getItem("categoryId")
       setUrl(url1);
     }
     try {
@@ -172,17 +170,7 @@ const ShopGridStandard = ({ location, products }) => {
                   sortedProductCount={currentData.length}
                 />
 
-                {/* shop page content default */}
-
-                {/* <div className="row">
-                <ProductGrid
-                  category={"category"}
-                  type="new"
-                  limit={100}
-                  spaceBottomClass="mb-10"
-                  apiURL = "https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetPromotedItems"
-                />
-              </div> */}
+                 
                 <ShopProducts
                   layout={layout}
                   products={
@@ -190,20 +178,7 @@ const ShopGridStandard = ({ location, products }) => {
                   }
                 />
 
-                {/* shop product pagination */}
-                {/* <div className="pro-pagination-style text-center mt-30">
-                  <Paginator
-                    totalRecords={sortedProducts.length}
-                    pageLimit={pageLimit}
-                    pageNeighbours={2}
-                    setOffset={setOffset}
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                    pageContainerClass="mb-0 mt-0"
-                    pagePrevText="«"
-                    pageNextText="»"
-                  />
-                </div> */}
+                
               </div>
             </div>
           </div>

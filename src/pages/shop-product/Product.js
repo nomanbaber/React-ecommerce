@@ -74,20 +74,7 @@ import { getAllArticleByID, getAllArticles } from "../../helpers/Constant";
           // productFullDesc={'full description'}
         />
 
-        {/* related product slider */}
-
-
-
-
-        {/* <div className="row">
-                <ProductGrid
-                  category={category}
-                  type="new"
-                  limit={8}
-                  spaceBottomClass="mb-25"
-                  apiURL = "https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetPromotedItems"
-                />
-              </div> */}
+        
         <RelatedProductSlider
           spaceBottomClass="pb-95"
            category={product.CategoryName}

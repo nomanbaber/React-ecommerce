@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { GetPromotedItems } from "../../helpers/Constant";
+import {   GetPromotedItems } from "../../helpers/Constant";
+import { GetArticlesByNames  } from "../../helpers/Constant";
 
 const ShopSearch = ({ handleSearchProducts }) => {
   const [searchText, setSearchText] = useState("");
@@ -17,7 +18,7 @@ const ShopSearch = ({ handleSearchProducts }) => {
     } else {
       try {
         const response = await fetch(
-          `https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetArticlesByName?articleName=${e.target.value}`
+          GetArticlesByNames +  e.target.value
         );
         const jsonData = await response.json();
         setRecords(jsonData.Data);

@@ -86,6 +86,8 @@ const Cart = ({
       setShippingType(jsonData.Data);
 
       setValue(jsonData.Data[0].Price);
+      localStorage.setItem('ShippingPrice', jsonData.Data[0].Price);
+
 
 
     } catch (error) {

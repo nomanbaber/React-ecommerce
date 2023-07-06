@@ -44,8 +44,7 @@ const ShopSidebar = ({
        BaseUrl +  `Articles/GetArticlesByCategory?minPrice=${minVal}&maxPrice=${maxVal}&categoryIds=${localStorage.getItem(
           "categoryId"
         )}`
-        // `https://4sleemnltgyu5hl4kotkycgmwi0uycqd.lambda-url.us-east-1.on.aws/Articles/GetArticlesByCategory?minPrice=${minVal}&maxPrice=${maxVal}&categoryIds=${categoryIdForApi}`
-      );
+       );
       const jsonData = await response.json();
       handleFilterByPriceProducts(jsonData.Data);
     } catch (error) {
