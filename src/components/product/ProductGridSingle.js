@@ -25,7 +25,7 @@ const ProductGridSingle = ({
   // const finalProductPrice = +(product.price * currency.currencyRate).toFixed(2);
   const finalProductPrice = product.Price;
   const finalDiscountedPrice = product.PreviousPrice
-  console.log ("product.RelatedArticles" , product.RelatedArticles )
+  console.log ("product.PreviousPrice" , discountedPrice )
 
   return (
     <Fragment>

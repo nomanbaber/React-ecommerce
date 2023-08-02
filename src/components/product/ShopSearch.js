@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {   GetPromotedItems } from "../../helpers/Constant";
+import {   BaseUrl, GetArticlesByCategory } from "../../helpers/Constant";
 import { GetArticlesByNames  } from "../../helpers/Constant";
 
 const ShopSearch = ({ handleSearchProducts }) => {
@@ -8,7 +8,7 @@ const ShopSearch = ({ handleSearchProducts }) => {
   const handleSearch = async (e) => {
     if (e.target.value === "") {
       try {
-        const response = await fetch(GetPromotedItems);
+        const response = await fetch(GetArticlesByCategory + "0");
         const jsonData = await response.json();
         setRecords(jsonData.Data);
         handleSearchProducts(jsonData.Data);
@@ -17,9 +17,8 @@ const ShopSearch = ({ handleSearchProducts }) => {
       }
     } else {
       try {
-        const response = await fetch(
-          GetArticlesByNames +  e.target.value
-        );
+        const response = await fetch(BaseUrl + `/Articles/GetArticlesByName?articleName=${e.target.value}`);
+
         const jsonData = await response.json();
         setRecords(jsonData.Data);
         handleSearchProducts(jsonData.Data);

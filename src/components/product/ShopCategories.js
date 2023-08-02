@@ -19,7 +19,10 @@ const ShopCategories = ({ categories, getSortParams }) => {
                   }
                   onClick={(e) => {
                     // getSortParams("category", "");
-                    getSortParams("category", "All");
+                    // getSortParams("category", "All");
+
+                    localStorage.setItem("categoryId", "0");
+                         window.location.href = "/shop";
                     setActiveSort(e);
                   }}
                 >
@@ -39,8 +42,12 @@ const ShopCategories = ({ categories, getSortParams }) => {
                           : ""
                       }
                       onClick={(e) => {
-                        getSortParams("category", category.Name);
-                        // getCategoryId(category.CategoryID);
+
+
+                        localStorage.setItem("categoryId", category.CategoryID);
+                         window.location.href = "/shop";
+                        // getSortParams("category", category.Name);
+                        // // getCategoryId(category.CategoryID);
                         setActiveSort(e);
                       }}
                     >

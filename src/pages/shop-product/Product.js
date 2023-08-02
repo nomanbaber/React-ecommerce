@@ -78,6 +78,7 @@ import { getAllArticleByID, getAllArticles } from "../../helpers/Constant";
         <RelatedProductSlider
           spaceBottomClass="pb-95"
            category={product.CategoryName}
+           params={params}
 
           //  {...console.log("product.CategoryName is" ,product.RelatedArticles[0].Title )}
           // category={'Category'}

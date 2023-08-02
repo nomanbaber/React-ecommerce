@@ -21,6 +21,8 @@ const ShopSidebar = ({
   sideSpaceClass,
   handleSearchProducts,
   handleFilterByPriceProducts,
+  dynamicMaxVal,
+  dynamicMinVal
 }) => {
   const uniqueCategories = getIndividualCategories(products);
   const uniqueColors = getIndividualColors(products);
@@ -31,20 +33,21 @@ const ShopSidebar = ({
   const [catId, setCatId] = useState();
   
   const handleFilterPrice = async (minVal, maxVal) => {
-    // console.log(catId);
-    // let categoryIdForApi;
-    // if (catId === undefined) {
-    //   categoryIdForApi = localStorage.getItem("categoryId");
-    // } else {
-    //   categoryIdForApi = catId;
-    // }
-    // console.log("categoryIdForApi", categoryIdForApi);
+  
     try {
       const response = await fetch(
+
+        
        BaseUrl +  `Articles/GetArticlesByCategory?minPrice=${minVal}&maxPrice=${maxVal}&categoryIds=${localStorage.getItem(
           "categoryId"
         )}`
        );
+
+       console.log("urlis" ,  BaseUrl +  `Articles/GetArticlesByCategory?minPrice=${minVal}&maxPrice=${maxVal}&categoryIds=${localStorage.getItem(
+        "categoryId"
+      )}`)
+
+       
       const jsonData = await response.json();
       handleFilterByPriceProducts(jsonData.Data);
     } catch (error) {
@@ -61,7 +64,7 @@ const ShopSidebar = ({
   //   // setCatId(catId);
   // };
   useEffect(() => {
-    handleFilterPrice(minVal, maxVal);
+  handleFilterPrice(minVal, maxVal);
   }, [minVal, maxVal]);
   return (
     <div className={`sidebar-style ${sideSpaceClass ? sideSpaceClass : ""}`}>
@@ -70,8 +73,8 @@ const ShopSidebar = ({
 
       {/* filter by price  */}
       <MultiRangeSlider
-        min={0}
-        max={60000}
+        min={dynamicMinVal}
+        max={dynamicMaxVal}
         onChange={({ min, max }) => handleMinMax(min, max)}
       />
       {/* filter by categories */}

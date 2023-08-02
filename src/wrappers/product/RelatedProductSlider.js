@@ -3,8 +3,9 @@ import React from "react";
 import Swiper from "react-id-swiper";
 import SectionTitle from "../../components/section-title/SectionTitle";
 import ProductGrid from "./ProductGrid";
+import { GetPromotedItems, getAllArticleByID } from "../../helpers/Constant";
 
-const RelatedProductSlider = ({ spaceBottomClass, category }) => {
+const RelatedProductSlider = ({ spaceBottomClass, category , params }) => {
   const settings = {
     loop: false,
     slidesPerView: 4,
@@ -37,13 +38,16 @@ const RelatedProductSlider = ({ spaceBottomClass, category }) => {
           positionClass="text-center"
           spaceClass="mb-50"
         />
-        <div className="row">
+        <div className="row" >
           <Swiper {...settings}>
-            <ProductGrid
-              category={"Cartas Magic"}
-              limit={6}
-              sliderClassName="swiper-slide"
-            />
+          <ProductGrid
+                  category={category}
+                  type="new"
+                  limit={8}
+                  spaceBottomClass="mb-25"
+                  apiURL = { getAllArticleByID +  params.id}
+                  isFrom = "related"
+                />
           </Swiper>
         </div>
       </div>

@@ -15,7 +15,7 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
             {cartData.map((single, key) => {
               const discountedPrice = getDiscountPrice(
                 single.Price,
-                single.PreviousPrice
+                single.discount
               );
               const finalProductPrice = (
                 single.Price * currency.currencyRate
@@ -34,10 +34,7 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
                       <img
                         alt=""
                         // src={process.env.PUBLIC_URL + single.image[0]}
-                         src={process.env.PUBLIC_URL + single.ImgLocations[0]}
-
-                         {...console.log("single carrt" , single)}
-
+                          src={process.env.PUBLIC_URL + single.ImgLocations[0]}
                         className="img-fluid"
                       />
                     </Link>
@@ -48,7 +45,7 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
                         to={process.env.PUBLIC_URL + "/product/" + single.ArticleID}
                       >
                         {" "}
-                        {single.Title}{" "}
+                        {single.name}{" "}
                       </Link>
                     </h4>
                     <h6>Qty: {single.quantity}</h6>
@@ -57,7 +54,6 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
                         ? currency.currencySymbol + finalDiscountedPrice
                         : currency.currencySymbol + finalProductPrice}
                     </span>
-                    
                     {single.selectedProductColor &&
                     single.selectedProductSize ? (
                       <div className="cart-item-variation">
@@ -80,7 +76,6 @@ const MenuCart = ({ cartData, currency, deleteFromCart }) => {
           <div className="shopping-cart-total">
             <h4>
               Total :{" "}
-              
               <span className="shop-total">
                 {currency.currencySymbol + cartTotalPrice.toFixed(2)}
               </span>

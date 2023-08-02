@@ -18,7 +18,8 @@ const ProductGrid = ({
   compareItems,
   sliderClassName,
   spaceBottomClass,
-  apiURL
+  apiURL,
+  isFrom
 }) => {
   const [records, setRecords] = useState([]);
   useEffect(() => {
@@ -31,12 +32,21 @@ const fetchData = async () => {
   try {
     const response = await fetch(apiURL);
     const jsonData = await response.json();
-     console.error('jsonData single data:', jsonData.Data[0].RelatedArticles);
+     console.error('jsonData single data:', response);
 
+      // return
 
-    setRecords(jsonData.Data);
+      if (isFrom == "related"){
+        setRecords(jsonData.Data.RelatedArticles);
+
+      }
+      else
+      {
+        setRecords(jsonData.Data);
+
+      }
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error('Error fetching data:', error, apiURL);
   }
 };
 

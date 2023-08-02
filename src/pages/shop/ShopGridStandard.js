@@ -12,7 +12,7 @@ import ShopTopbar from "../../wrappers/product/ShopTopbar";
 import ShopProducts from "../../wrappers/product/ShopProducts";
 import axios from "axios";
 import ProductGrid from "../../wrappers/product/ProductGrid";
-import { GetArticlesByCategory, GetPromotedItems } from "../../helpers/Constant";
+import { BaseUrl, GetArticlesByCategory } from "../../helpers/Constant";
 
 const ShopGridStandard = ({ location, products }) => {
   const [layout, setLayout] = useState("grid three-column");
@@ -30,6 +30,8 @@ const ShopGridStandard = ({ location, products }) => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [url, setUrl] = useState("");
   const [allProducts, setAllProducts] = useState([]);
+  const [maxval, setmaxval] = useState(0);
+  const [minval, setminval] = useState(0);
 
   const pageLimit = 15;
   const { pathname } = location;
@@ -70,20 +72,27 @@ const ShopGridStandard = ({ location, products }) => {
     fetchData();
     // }, [offset, products, sortType, sortValue, filterSortType, filterSortValue]);
   }, [offset, products]);
+  
   const fetchData = async () => {
     var url1 = "";
+    console.log("get cat id:" , localStorage.getItem("categoryId"))
     if (localStorage.getItem("categoryId") == 0) {
-      url1 =
-        GetPromotedItems;
+       
+      url1 = BaseUrl + `/Articles/GetArticlesByCategory?categoryIds=0`
+
+      
       setUrl(url1);
     } else {
-      url1 =  GetArticlesByCategory + localStorage.getItem("categoryId")
+      url1 = BaseUrl + `/Articles/GetArticlesByCategory?categoryIds=${localStorage.getItem(
+        "categoryId"
+      )}`;
       setUrl(url1);
     }
     try {
       const response = await fetch(url1);
       const jsonData = await response.json();
       setRecords(jsonData.Data);
+     
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -92,10 +101,20 @@ const ShopGridStandard = ({ location, products }) => {
   const getAllProducts = () => {
     axios
       .get(
-        GetPromotedItems
+        GetArticlesByCategory + "0"
       )
       .then((response) => {
         setAllProducts(response.data.Data);
+        
+        console.log("minandmaxval", response.data.AdditionalData.maxPrice) 
+        setmaxval(response.data.AdditionalData.maxPrice)
+ 
+        localStorage.setItem('MaxPrice', response.data.AdditionalData.maxPrice);
+        localStorage.setItem('MinPrice', response.data.AdditionalData.minPrice);
+
+ 
+
+
       })
       .catch((err) => {
         console.log("Error: ", err);
@@ -159,6 +178,10 @@ const ShopGridStandard = ({ location, products }) => {
                   sideSpaceClass="mr-30"
                   handleSearchProducts={handleSearchProducts}
                   handleFilterByPriceProducts={handleFilterByPriceProducts}
+                  dynamicMaxVal={ localStorage.getItem("MaxPrice") 
+                }
+
+                  dynamicMinVal={ 0 }
                 />
               </div>
               <div className="col-lg-9 order-1 order-lg-2">
