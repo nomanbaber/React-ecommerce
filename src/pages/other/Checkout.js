@@ -12,39 +12,63 @@ import { CardPayment } from '@mercadopago/sdk-react';
 import { CardNumber } from '@mercadopago/sdk-react';
 import { Payment } from '@mercadopago/sdk-react';
 import { CreatePayment } from "../../helpers/Constant";
+import Axios from "axios";
 
 const Checkout = ({ location, cartItems, currency }) => {
   initMercadoPago('TEST-89a2fc45-9934-45f4-9059-6f7ab6c4acb3');
 
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState(null);
 
-  function isValidEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
-  }
+  const [email, setEmail] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     setEmail(event.target.value);
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
-    setError(null);
+    // Validate the email address
+    const regex = /\S+@\S+\.\S+/;
+    if (!regex.test(email)) {
+      // const selectedData = cartItems.map((item) => {
+      //   var pp = item.Price   
+      // })
+      
 
-    if (isValidEmail(email)) {
-      console.log('The email is valid');
-    } else {
-      setError('Email is invalid');
+
+      alert("Invalid email address");
+      return;
     }
-  };
+    else{
 
+      {cartItems.map((cartItem, key) => {
+          apiTotalPrice+= cartItem.Price * cartItem.quantity
+      }
+
+      )}
+      console.log("total price is" , apiTotalPrice + ShippingPriceData )
+
+ 
+
+     fetchData(email)
+    }
+
+    // POST the email address to the API
+    // Axios.post("/api/submit", {
+    //   email,
+    // }).then((response) => {
+    //   alert("Form submitted successfully.");
+    // });
+  };
 
   const [records, setRecords] = useState([]);
 
 
   const { pathname } = location;
   let cartTotalPrice = 0;
+  let apiTotalPrice = 0;
+
   const ShippingPriceData = JSON.parse(localStorage.getItem("ShippingPrice"));
   const initialization = {
     amount: 100,
@@ -55,9 +79,10 @@ const Checkout = ({ location, cartItems, currency }) => {
 
   }, []);
 
-  const fetchData = async () => {
+  const fetchData = async (email) => {
     try {
 
+      console.log("email is", email)
       // Map the array to create a new array with selected keys and values
       const selectedData = cartItems.map((item) => {
         return {
@@ -70,13 +95,13 @@ const Checkout = ({ location, cartItems, currency }) => {
         };
       });
       const formData = {
-        "totalAmount": 55000,
-        "clientEmail": "gvena@gmail.com",
+        "totalAmount": apiTotalPrice + ShippingPriceData,
+        "clientEmail": email,
         "productDetails": [
           {
             "Title": "The Apocalypse",
             "Quantity": 1,
-            "UnitPrice": 55000,
+            "UnitPrice": apiTotalPrice + ShippingPriceData,
             "ArticleID": 9
           }
         ],
@@ -92,6 +117,8 @@ const Checkout = ({ location, cartItems, currency }) => {
       console.log("response data in payment", data.Data.PaymentID)
 
       setRecords(data.Data)
+      setIsVisible(true);
+
 
       console.log("response data in cartitems", CreatePayment)
       // If you don't want to create new array, you can use forEach
@@ -219,11 +246,11 @@ const Checkout = ({ location, cartItems, currency }) => {
                           {/* <input type="text" /> */}
 
                           <input
-                            className='p-3 flex w-full rounded-md text-black'
-                            type='email'
-                            name='Email'
-
-                            required />
+                            type="email"
+                            placeholder="Enter your email address"
+                            value={email}
+                            onChange={handleChange}
+                          />
                         </div>
                       </div>
                     </div>
@@ -280,7 +307,9 @@ const Checkout = ({ location, cartItems, currency }) => {
                                       : currency.currencySymbol +
                                       (
                                         finalProductPrice * cartItem.quantity
-                                      ).toFixed(2)}
+                                      ).toFixed(2)
+                                      
+                                      }
                                   </span>
                                 </li>
                               );
@@ -320,16 +349,13 @@ const Checkout = ({ location, cartItems, currency }) => {
                     </div> */}
 
                     <div className="place-order mt-25">
-                      <button className="btn-hover" onClick={() => {
-
-                        console.log("asdsadsadsa")
-                      }}>Place Order</button>
+                      <button className="btn-hover" onClick={handleSubmit}>Place Order</button>
                     </div>
                   </div>
-
+                  {isVisible && (
 
                   <Wallet initialization={{ preferenceId: records.PaymentID }} />
-
+                  )}
                 </div>
               </div>
             ) : (
