@@ -42,6 +42,8 @@ const ProductImageDescription = ({
             {/* product image gallery */}
             {galleryType === "leftThumb" ? (
 
+
+               
                <ProductImageGallerySideThumb
                 product={product}
                 thumbPosition="left"

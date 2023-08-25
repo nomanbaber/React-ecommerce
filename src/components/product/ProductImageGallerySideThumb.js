@@ -91,7 +91,12 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition }) => {
                       <div key={key}>
                         <LightgalleryItem
                           group="any"
-                          src={process.env.PUBLIC_URL + product.ImgLocations[key]}
+
+
+                          src={ product.ImgLocations.length > 0 ?  process.env.PUBLIC_URL +
+                            product.ImgLocations[key]:    process.env.PUBLIC_URL + "/assets/img/icon-img/no-img.jpeg"
+                      }
+                          // src={process.env.PUBLIC_URL + product.ImgLocations[key]}
                         >
                           <button>
                             <i className="pe-7s-expand1"></i>
@@ -99,7 +104,9 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition }) => {
                         </LightgalleryItem>
                         <div className="single-image">
                           <img
-                            src={process.env.PUBLIC_URL + product.ImgLocations[key]}
+                          src={ product.ImgLocations.length > 0 ?  process.env.PUBLIC_URL +
+                            product.ImgLocations[key]:    process.env.PUBLIC_URL + "/assets/img/icon-img/no-img.jpeg"
+                      }
                             className="img-fluid"
                             alt=""
                           />
@@ -126,7 +133,9 @@ const ProductImageGalleryLeftThumb = ({ product, thumbPosition }) => {
                     <div key={key}>
                       <div className="single-image">
                         <img
-                          src={process.env.PUBLIC_URL + product.ImgLocations[key]}
+                          src={ product.ImgLocations.length > 0 ?  process.env.PUBLIC_URL +
+                            product.ImgLocations[key]:    process.env.PUBLIC_URL + "/assets/img/icon-img/no-img.jpeg"
+                      }
                           className="img-fluid"
                           alt=""
                         />

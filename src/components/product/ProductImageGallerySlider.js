@@ -47,6 +47,8 @@ const ProductImageGallerySlider = ({ product }) => {
                 <div className="single-image">
                   <img
                     src={process.env.PUBLIC_URL + single}
+
+                    
                     className="img-fluid"
                     alt=""
                   />

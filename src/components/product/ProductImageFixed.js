@@ -20,8 +20,8 @@ const ProductImageFixed = ({ product }) => {
       <div className="product-fixed-image">
         {product.ImgLocations ? (
           <img
-            src={process.env.PUBLIC_URL + product.ImgLocations[0]}
-            alt=""
+          src={ product.ImgLocations.length > 0 ? process.env.PUBLIC_URL + product.ImgLocations[0]:    process.env.PUBLIC_URL + "/assets/img/icon-img/no-img.jpeg" }            
+          alt=""
             className="img-fluid"
           />
         ) : (

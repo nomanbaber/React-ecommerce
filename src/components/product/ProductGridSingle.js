@@ -41,13 +41,19 @@ const ProductGridSingle = ({
             <Link to={process.env.PUBLIC_URL + "/product/" + product.ArticleID}>
               <img
                 className="default-img"
-                src={process.env.PUBLIC_URL + product.ImgLocations[0]}
+                src={ product.ImgLocations.length > 0 ? process.env.PUBLIC_URL + product.ImgLocations[0]:    process.env.PUBLIC_URL + "/assets/img/icon-img/no-img.jpeg"
+              }
                 alt=""
               />
               {product.ImgLocations.length > 1 ? (
                 <img
                   className="hover-img"
-                  src={process.env.PUBLIC_URL + product.ImgLocations[1]}
+                  // src={process.env.PUBLIC_URL + product.ImgLocations[1]}
+
+                  src={ product.ImgLocations.length > 0 ?  process.env.PUBLIC_URL +
+                    product.ImgLocations[1]:    process.env.PUBLIC_URL + "/assets/img/icon-img/no-img.jpeg"
+              }
+
                   alt=""
                 />
               ) : (

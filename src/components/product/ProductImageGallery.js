@@ -72,8 +72,8 @@ const ProductImageGallery = ({ product }) => {
           {console.log("singlesinglesingle", product)}
 
           <Swiper {...gallerySwiperParams}>
-
-
+            
+ 
             {product.ImgLocations &&
               product.ImgLocations.map((single, key) => {
 
@@ -85,7 +85,11 @@ const ProductImageGallery = ({ product }) => {
                   <div key={key}>
                     <LightgalleryItem
                       group="any"
-                      src={process.env.PUBLIC_URL + product.ImgLocations[key]}
+
+                      src={ product.ImgLocations.length > 0 ? process.env.PUBLIC_URL + product.ImgLocations[key]:    process.env.PUBLIC_URL + "/assets/img/icon-img/no-img.jpeg"
+                }
+
+                      // src={process.env.PUBLIC_URL + product.ImgLocations[key]}
                     >
                       <button>
                         <i className="pe-7s-expand1"></i>

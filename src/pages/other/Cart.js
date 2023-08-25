@@ -172,10 +172,13 @@ const Cart = ({
                                   >
                                     <img
                                       className="img-fluid"
-                                      src={
-                                        process.env.PUBLIC_URL +
-                                        cartItem.ImgLocations[0]
-                                      }
+
+                                      src={ cartItem.ImgLocations.length > 0 ?  process.env.PUBLIC_URL +
+                                        cartItem.ImgLocations[0]:    process.env.PUBLIC_URL + "/assets/img/icon-img/no-img.jpeg"
+                                  }
+                                      // src={
+                                       
+                                      // }
                                       alt=""
                                     />
                                   </Link>

@@ -131,7 +131,8 @@ const Categories = () => {
                 <div className="item">
                   <div className="save-time">
                     <div className="save-icon">
-                      <img src={item.ImgLocation} alt="" />
+                      <img 
+                      src={item.ImgLocation} alt="" />
                     </div>
                     <p className="text-center save-text pt-3">{item.Name}</p>
                   </div>
